@@ -73,7 +73,7 @@ __global__ void cuda_sgemm(float *A_ptr, float *B_ptr, float *C_ptr, const int M
         __syncthreads();
         for(int i = 0; i < NUM_PRE_THREAD_; i++){
             for(int k = 0; k < NUM_PRE_BLOCK_K_; k++){
-                tmp[i] = a_shared[tx][k] * b_shared[k][ty * NUM_PRE_THREAD_ + i];
+                tmp[i] += a_shared[tx][k] * b_shared[k][ty * NUM_PRE_THREAD_ + i];
             }
         }
         __syncthreads();
@@ -119,7 +119,7 @@ int main()
     const int NUM_PRE_BLOCK_K = 32;
     const int NUM_PRE_THREAD = 4;
     dim3 block(NUM_PRE_BLOCK_M, NUM_PRE_BLOCK_K / NUM_PRE_THREAD);
-    dim3 grid((m + NUM_PRE_BLOCK_M - 1) / NUM_PRE_BLOCK_M, (NUM_PRE_BLOCK_N + NUM_PRE_BLOCK_N - 1) / NUM_PRE_BLOCK_N);
+    dim3 grid((m + NUM_PRE_BLOCK_M - 1) / NUM_PRE_BLOCK_M, (n + NUM_PRE_BLOCK_N - 1) / NUM_PRE_BLOCK_N);
 
     cuda_sgemm<NUM_PRE_BLOCK_M, NUM_PRE_BLOCK_N, NUM_PRE_BLOCK_K, NUM_PRE_THREAD><<<grid, block>>>(matrix_A_device, matrix_B_device, matrix_C_device, m, n, k);
 
