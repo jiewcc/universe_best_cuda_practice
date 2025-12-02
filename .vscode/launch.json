@@ -8,7 +8,7 @@
             "name": "CUDA C++: Launch",
             "type": "cuda-gdb",
             "request": "launch",
-            "program": "/home/jiew/universe_best_cuda_practice/build/2_cuda_sgemm_study/my_sgemm_v1_shared_memory"
+            "program": "/home/jiew/universe_best_cuda_practice/build/2_cuda_sgemm_study/my_sgemm_v4_using_float4"
         },
         {
             "name": "CUDA C++: Attach",
