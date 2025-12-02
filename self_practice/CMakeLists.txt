@@ -1,0 +1,1 @@
+add_executable(self_practice main.cu)
