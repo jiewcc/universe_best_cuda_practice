@@ -1,6 +1,0 @@
-# 构建系统
-build*/
-.vscode/
-# CMake 生成文件
-CMakeCache.txt
-CMakeLists.txt
